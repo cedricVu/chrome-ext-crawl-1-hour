@@ -24,6 +24,7 @@ function fetchDataAndPost(tab) {
 }
 
 function readTableData() {
+    // Todo: read today trending.
     try {
         const table = document.querySelector('.min-w-full');
         if (!table) {
@@ -58,7 +59,12 @@ function readTableData() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ data: results })
+            body: JSON.stringify({
+                data: {
+                    tableTrending: results,
+                    todayTrending: '' // Todo
+                }
+            })
         }).then((postResponse) => {
             console.log({ postResponse });
         }).catch(err => console.log('Post data error', err));
