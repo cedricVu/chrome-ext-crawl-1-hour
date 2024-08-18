@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Data Fetcher and Poster",
+  "version": "1.0",
+  "permissions": [
+    "background",
+    "alarms",
+    "storage",
+    "activeTab",
+    "scripting",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://trending.ytuong.me/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
