@@ -32,7 +32,7 @@ function readTableData() {
             return;
         }
 
-        const results = [];
+        const tableData = [];
         const rows = table.querySelectorAll('tbody tr');
         rows.forEach((row) => {
             const data = {};
@@ -50,19 +50,21 @@ function readTableData() {
             data.score = cells[2].innerText;
             data.country = cells[4].innerText;
 
-            results.push(data);
+            tableData.push(data);
         });
-        console.log({ results });
-        /// Post data
-        fetch('http://localhost:8080/api/trending-update', {
+
+        const spans = document.querySelectorAll('.flex.flex-wrap.items-center.-m-1 button span')
+        const todayKeywords = Array.from(spans).map(item => item.innerText?.trim()).filter(item => !!item);
+
+        fetch('http://localhost:5001/api/trending-keywords', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 data: {
-                    tableTrending: results,
-                    todayTrending: '' // Todo
+                    tableTrending: tableData,
+                    todayTrending: todayKeywords
                 }
             })
         }).then((postResponse) => {
