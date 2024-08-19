@@ -1,4 +1,4 @@
-chrome.alarms.create("fetchDataAlarm", { periodInMinutes: 0.05 });
+chrome.alarms.create("fetchDataAlarm", { periodInMinutes: 60 });
 
 chrome.alarms.onAlarm.addListener((alarm) => {
     if (alarm.name === "fetchDataAlarm") {
@@ -56,7 +56,7 @@ function readTableData() {
         const spans = document.querySelectorAll('.flex.flex-wrap.items-center.-m-1 button span')
         const todayKeywords = Array.from(spans).map(item => item.innerText?.trim()).filter(item => !!item);
 
-        fetch('http://localhost:5001/api/trending-keywords', {
+        fetch('https://tts-api.ecomdy.com/api/trending-keywords', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
