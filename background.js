@@ -5,10 +5,9 @@ chrome.alarms.onAlarm.addListener((alarm) => {
         chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
             const tab = tabs[0];
             if (tab && tab.url && tab.id && !tab.url.startsWith('chrome://') && tab.url.startsWith('https://trending.ytuong.me')) {
-                // chrome.tabs.reload(tabs[0].id, { bypassCache: true }, function() {
-                //     console.log('page reloaded');
-                // });
-                fetchDataAndPost(tab);
+                chrome.tabs.reload(tabs[0].id, { bypassCache: true }, function() {
+                    fetchDataAndPost(tab);
+                });
             } else {
                 console.warn('Cannot access content of a chrome:// URL');
             }
